@@ -1,6 +1,7 @@
 namespace Resources.Const;
 
-public struct Names
+public static class Names
 {
-    
+    public const string US = "US";
+    public const string MX = "MX";
 }

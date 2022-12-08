@@ -1,4 +1,4 @@
-namespace Resources;
+namespace Resources.Services;
 
 public static class Parsers
 {
