@@ -6,9 +6,9 @@ namespace Core;
 
 public class Cash : ICash
 {
-    public decimal? ConvertTotalCharge2Decimal(string chargeTotal)
+    public decimal? ConvertTotalCharge2Decimal(string totalCharge)
     {
-        return ParseString2Decimal(chargeTotal);
+        return ParseString2Decimal(totalCharge);
     }
 
     public decimal[] ConvertCashProvided2Decimal(string cashProvided)

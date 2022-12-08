@@ -1,5 +1,6 @@
 ﻿using Contracts;
 using Entities;
+using Resources.Const;
 using Resources.Enums;
 
 namespace Controllers;
@@ -12,23 +13,23 @@ public class CashController
     public CashController(ICash cash, IValidation validation) => 
         (_cash, _validation) = (cash, validation);
 
-    public MessageResponse GetChange(string chargeTotal, string cashProvided)
+    public MessageResponse GetChange(string totalCharge, string cashProvided)
     {
-        var total = _cash.ConvertTotalCharge2Decimal(chargeTotal);
+        var total = _cash.ConvertTotalCharge2Decimal(totalCharge);
         if (total == null)
         {
-            return new MessageResponse("Invalid charge total", Status.Failed);
+            return new MessageResponse(Texts.ERROR_INVALID_TC, Status.Failed);
         }
 
         var cash = _cash.ConvertCashProvided2Decimal(cashProvided);
         if (cash.Length == 0)
         {
-            return new MessageResponse("Invalid cash provided", Status.Failed);
+            return new MessageResponse(Texts.ERROR_INVALID_CP, Status.Failed);
         }
 
         if (!_validation.ValidateCashProvidedIsEnough(total.Value, cash))
         {
-            return new MessageResponse("Cash Provided is not enough", Status.Failed);
+            return new MessageResponse(Texts.ERROR_NOT_ENOUGH, Status.Failed);
         }
         
         var result = _cash.GetChange(total.Value, cash);
